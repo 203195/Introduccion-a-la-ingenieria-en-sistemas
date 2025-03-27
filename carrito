@@ -1,0 +1,117 @@
+class CarritoCompras:
+    def __init__(self):
+        self.productos = {
+            'Manzana': {'precio': 1.50, 'cantidad': 100},
+            'Pan': {'precio': 2.00, 'cantidad': 50},
+            'Leche': {'precio': 3.20, 'cantidad': 30},
+            'Huevos': {'precio': 4.50, 'cantidad': 40},
+            'Arroz': {'precio': 2.30, 'cantidad': 60}
+        }
+        self.carrito = {}
+    
+    def mostrar_menu(self):
+        print("\n--- CARNETA DE COMPRAS ---")
+        print("1. Mostrar productos disponibles")
+        print("2. Consultar precio y cantidad de un producto")
+        print("3. Agregar producto al carrito")
+        print("4. Ver carrito de compras")
+        print("5. Finalizar compra")
+        print("6. Salir")
+    
+    def mostrar_productos(self):
+        print("\n--- PRODUCTOS DISPONIBLES ---")
+        for producto, info in self.productos.items():
+            print(f"{producto}: ${info['precio']:.2f} - Disponibles: {info['cantidad']}")
+    
+    def consultar_producto(self):
+        producto = input("\nIngrese el nombre del producto a consultar: ").capitalize()
+        if producto in self.productos:
+            info = self.productos[producto]
+            print(f"\n{producto}:")
+            print(f"Precio: ${info['precio']:.2f}")
+            print(f"Cantidad disponible: {info['cantidad']}")
+        else:
+            print("\nProducto no encontrado.")
+    
+    def agregar_al_carrito(self):
+        self.mostrar_productos()
+        producto = input("\nIngrese el nombre del producto a agregar: ").capitalize()
+        
+        if producto not in self.productos:
+            print("\nProducto no válido.")
+            return
+        
+        try:
+            cantidad = int(input(f"Ingrese la cantidad de {producto} que desea: "))
+            if cantidad <= 0:
+                print("\nLa cantidad debe ser mayor que cero.")
+                return
+                
+            if cantidad > self.productos[producto]['cantidad']:
+                print("\nNo hay suficiente stock disponible.")
+                return
+                
+            if producto in self.carrito:
+                self.carrito[producto] += cantidad
+            else:
+                self.carrito[producto] = cantidad
+            
+            self.productos[producto]['cantidad'] -= cantidad
+            print(f"\n{cantidad} {producto}(s) agregado(s) al carrito.")
+            
+        except ValueError:
+            print("\nPor favor ingrese un número válido.")
+    
+    def ver_carrito(self):
+        if not self.carrito:
+            print("\nEl carrito está vacío.")
+            return
+        
+        total = 0
+        print("\n--- CARRITO DE COMPRAS ---")
+        for producto, cantidad in self.carrito.items():
+            precio_unitario = self.productos[producto]['precio']
+            subtotal = precio_unitario * cantidad
+            total += subtotal
+            print(f"{producto}: {cantidad} x ${precio_unitario:.2f} = ${subtotal:.2f}")
+        
+        print(f"\nTOTAL A PAGAR: ${total:.2f}")
+    
+    def finalizar_compra(self):
+        if not self.carrito:
+            print("\nNo hay productos en el carrito.")
+            return
+        
+        self.ver_carrito()
+        confirmacion = input("\n¿Desea confirmar la compra? (s/n): ").lower()
+        
+        if confirmacion == 's':
+            print("\n¡Compra realizada con éxito! Gracias por su compra.")
+            self.carrito = {}
+        else:
+            print("\nCompra cancelada.")
+    
+    def ejecutar(self):
+        while True:
+            self.mostrar_menu()
+            opcion = input("\nSeleccione una opción: ")
+            
+            if opcion == '1':
+                self.mostrar_productos()
+            elif opcion == '2':
+                self.consultar_producto()
+            elif opcion == '3':
+                self.agregar_al_carrito()
+            elif opcion == '4':
+                self.ver_carrito()
+            elif opcion == '5':
+                self.finalizar_compra()
+            elif opcion == '6':
+                print("\nGracias por usar nuestro sistema. ¡Hasta pronto!")
+                break
+            else:
+                print("\nOpción no válida. Por favor intente nuevamente.")
+
+if __name__ == "__main__":
+    carrito = CarritoCompras()
+    carrito.ejecutar()
