@@ -1,11 +1,11 @@
 class CarritoCompras:
     def __init__(self):
         self.productos = {
-            'Manzana': {'precio': 1.50, 'cantidad': 100},
-            'Pan': {'precio': 2.00, 'cantidad': 50},
-            'Leche': {'precio': 3.20, 'cantidad': 30},
-            'Huevos': {'precio': 4.50, 'cantidad': 40},
-            'Arroz': {'precio': 2.30, 'cantidad': 60}
+            'Manzana': {'precio': 30.00, 'cantidad': 100},
+            'Pan': {'precio': 40.00, 'cantidad': 50},
+            'Leche': {'precio': 42.00, 'cantidad': 30},
+            'Huevos': {'precio': 50.00, 'cantidad': 40},
+            'Arroz': {'precio': 20.00, 'cantidad': 60}
         }
         self.carrito = {}
     
