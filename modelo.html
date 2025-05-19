@@ -28,6 +28,95 @@
     </nav>
     <section class="container my-5">
         <div class="row justify-content-center">
+            <div class="col-md-10">
+                <h2 class="fw-bold mb-3">Introducción a la Inteligencia Artificial y Modelos de Aprendizaje</h2>
+                <p>
+                    La Inteligencia Artificial (IA) es una rama de la informática que busca desarrollar sistemas capaces de realizar tareas que normalmente requieren inteligencia humana, como el aprendizaje, el razonamiento, la percepción y la toma de decisiones. Los modelos de aprendizaje son algoritmos y técnicas que permiten a las máquinas mejorar su desempeño a partir de datos.
+                </p>
+                <p>
+                    Esta investigación explora los fundamentos de la IA, sus tipos y los principales modelos de aprendizaje automático.
+                </p>
+                <h4 class="mt-4">1. ¿Qué es la Inteligencia Artificial (IA)?</h4>
+                <p>
+                    La IA es un campo multidisciplinario que combina ciencias de la computación, matemáticas, psicología y neurociencia para crear sistemas inteligentes. Según John McCarthy (1956), uno de los padres de la IA, se define como:
+                </p>
+                <blockquote class="blockquote">
+                    "La ciencia e ingeniería de hacer máquinas inteligentes, especialmente programas de computación inteligentes."
+                </blockquote>
+                <h5 class="mt-3">1.1. Objetivos de la IA</h5>
+                <ul>
+                    <li><strong>Automatización de procesos:</strong> Realizar tareas repetitivas sin intervención humana.</li>
+                    <li><strong>Imitación del razonamiento humano:</strong> Resolver problemas complejos mediante lógica.</li>
+                    <li><strong>Aprendizaje autónomo:</strong> Mejorar el rendimiento con experiencia (Machine Learning).</li>
+                </ul>
+                <h5 class="mt-3">1.2. Tipos de IA</h5>
+                <ul>
+                    <li><strong>IA Débil (Narrow AI):</strong> Diseñada para tareas específicas (ej: chatbots, reconocimiento facial).</li>
+                    <li><strong>IA Fuerte (General AI):</strong> Capacidad de razonar como un humano (aún en desarrollo).</li>
+                    <li><strong>Superinteligencia (Artificial Superintelligence - ASI):</strong> Hipótesis de IA que supera la inteligencia humana.</li>
+                </ul>
+                <h4 class="mt-4">2. Modelos de Aprendizaje en IA</h4>
+                <p>Los modelos de aprendizaje permiten a los sistemas mejorar con datos. Se clasifican en tres categorías principales:</p>
+                <h5 class="mt-3">2.1. Aprendizaje Supervisado (Supervised Learning)</h5>
+                <ul>
+                    <li><strong>Definición:</strong> El modelo aprende a partir de datos etiquetados (input-output conocido).</li>
+                    <li><strong>Algoritmos comunes:</strong>
+                        <ul>
+                            <li>Regresión lineal (predicción numérica).</li>
+                            <li>Árboles de decisión (clasificación basada en reglas).</li>
+                            <li>Redes neuronales (Deep Learning).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Aplicaciones:</strong>
+                        <ul>
+                            <li>Predicción de precios.</li>
+                            <li>Diagnóstico médico.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <h5 class="mt-3">2.2. Aprendizaje No Supervisado (Unsupervised Learning)</h5>
+                <ul>
+                    <li><strong>Definición:</strong> El modelo identifica patrones en datos sin etiquetar.</li>
+                    <li><strong>Algoritmos comunes:</strong>
+                        <ul>
+                            <li>K-means (agrupamiento/clustering).</li>
+                            <li>PCA (reducción de dimensionalidad).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Aplicaciones:</strong>
+                        <ul>
+                            <li>Segmentación de clientes.</li>
+                            <li>Detección de anomalías.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <h5 class="mt-3">2.3. Aprendizaje por Refuerzo (Reinforcement Learning)</h5>
+                <ul>
+                    <li><strong>Definición:</strong> El modelo aprende mediante recompensas y castigos.</li>
+                    <li><strong>Algoritmos comunes:</strong>
+                        <ul>
+                            <li>Q-Learning.</li>
+                            <li>Deep Q-Networks (DQN).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Aplicaciones:</strong>
+                        <ul>
+                            <li>Robots autónomos.</li>
+                            <li>Juegos (ej: AlphaGo).</li>
+                        </ul>
+                    </li>
+                </ul>
+                <h4 class="mt-4">3. Tendencias Futuras en IA</h4>
+                <ul>
+                    <li><strong>IA Generativa:</strong> Modelos como GPT-4 y DALL-E que crean contenido.</li>
+                    <li><strong>IA Explicable (XAI):</strong> Mayor transparencia en decisiones de IA.</li>
+                    <li><strong>Quantum Machine Learning:</strong> Uso de computación cuántica para optimizar modelos.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="container my-5">
+        <div class="row justify-content-center">
             <div class="col-md-8 text-center">
                 <h2 class="text-center mb-4 fw-bold">Prueba el Modelo IA en la Página</h2>
                 <div>Teachable Machine Image Model</div>
@@ -54,16 +143,42 @@
             maxPredictions = model.getTotalClasses();
 
             const flip = true; // Voltear la cámara
-            webcam = new tmImage.Webcam(224, 224, flip);
+            webcam = new tmImage.Webcam(350, 350, flip); // Más grande
             await webcam.setup();
             await webcam.play();
             window.requestAnimationFrame(loop);
 
+            document.getElementById("webcam-container").innerHTML = "";
             document.getElementById("webcam-container").appendChild(webcam.canvas);
             labelContainer = document.getElementById("label-container");
             labelContainer.innerHTML = "";
             for (let i = 0; i < maxPredictions; i++) {
-                labelContainer.appendChild(document.createElement("div"));
+                // Contenedor de barra y etiqueta
+                const barWrapper = document.createElement("div");
+                barWrapper.className = "mb-2 text-start";
+                // Etiqueta
+                const label = document.createElement("span");
+                label.className = "fw-bold";
+                label.style.display = "inline-block";
+                label.style.width = "160px";
+                // Barra
+                const barBg = document.createElement("div");
+                barBg.className = "progress";
+                barBg.style.height = "24px";
+                barBg.style.display = "inline-block";
+                barBg.style.width = "60%";
+                barBg.style.verticalAlign = "middle";
+                const bar = document.createElement("div");
+                bar.className = "progress-bar";
+                bar.setAttribute("role", "progressbar");
+                bar.style.width = "0%";
+                bar.style.transition = "width 0.3s";
+                bar.innerText = "0%";
+                barBg.appendChild(bar);
+
+                barWrapper.appendChild(label);
+                barWrapper.appendChild(barBg);
+                labelContainer.appendChild(barWrapper);
             }
         }
 
@@ -76,9 +191,22 @@
         async function predict() {
             const prediction = await model.predict(webcam.canvas);
             for (let i = 0; i < maxPredictions; i++) {
-                const classPrediction =
-                    prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(2) + "%";
-                labelContainer.childNodes[i].innerHTML = classPrediction;
+                const barWrapper = labelContainer.childNodes[i];
+                const label = barWrapper.childNodes[0];
+                const barBg = barWrapper.childNodes[1];
+                const bar = barBg.childNodes[0];
+                const percent = Math.round(prediction[i].probability * 100);
+                label.innerText = prediction[i].className + ": ";
+                bar.style.width = percent + "%";
+                bar.innerText = percent + "%";
+                // Cambia color según porcentaje
+                if (percent > 70) {
+                    bar.className = "progress-bar bg-success";
+                } else if (percent > 40) {
+                    bar.className = "progress-bar bg-warning";
+                } else {
+                    bar.className = "progress-bar bg-danger";
+                }
             }
         }
     </script>
